@@ -62,7 +62,6 @@ set -ex
 if ! test -b ${data} ; then
   mkdir -p ${data}
 fi
-mkfs -t xfs fs-options -f -i size=2048  ${data}
 ceph-disk prepare ${cluster_option} ${data} ${journal}
 # activate happens via udev when using the entire device
 if ! test -b ${data} || ! test -b ${data}1 ; then
