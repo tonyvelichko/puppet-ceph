@@ -72,17 +72,17 @@ define ceph::mon (
         name     => "ceph-mon-${id}",
         # workaround for bug https://projects.puppetlabs.com/issues/23187
         provider => 'init',
-        start    => "start ceph-mon id=${id}",
-        stop     => "stop ceph-mon id=${id}",
-        status   => "status ceph-mon id=${id}",
+        start    => "start ceph-mon id=${id} $cluster_option",
+        stop     => "stop ceph-mon id=${id} $cluster_option",
+        status   => "status ceph-mon id=${id} $cluster_option",
       }
     } elsif ($::operatingsystem == 'Debian') or ($::osfamily == 'RedHat') {
       $init = 'sysvinit'
       Service {
         name     => "ceph-mon-${id}",
-        start    => "service ceph start mon.${id}",
-        stop     => "service ceph stop mon.${id}",
-        status   => "service ceph status mon.${id}",
+        start    => "service ceph start mon.${id} $cluster_option",
+        stop     => "service ceph stop mon.${id} $cluster_option",
+        status   => "service ceph status mon.${id} $cluster_option",
       }
     } else {
       fail("operatingsystem = ${::operatingsystem} is not supported")
