@@ -87,6 +87,7 @@ define ceph::key (
 
   if $cluster {
     $cluster_option = "--cluster ${cluster}"
+    $keyring_path = "/etc/ceph/${cluster}.${name}.keyring"
   }
 
   if $cap_mon {
