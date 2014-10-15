@@ -25,6 +25,7 @@ class ceph::profile::mon {
     authentication_type => $ceph::profile::params::authentication_type,
     key                 => $ceph::profile::params::mon_key,
     keyring             => $ceph::profile::params::mon_keyring,
+    stage               => 'install'
   }
 
   Ceph::Key {
