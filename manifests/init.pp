@@ -96,43 +96,43 @@ class ceph (
   }
 
   if $ensure !~ /(absent|purged)/ {
-    # Make sure ceph is installed before managing the configuration
+  # Make sure ceph is installed before managing the configuration
     Package<| tag == 'ceph' |> -> Ceph_Config<| |>
-    # [global]
+  # [global]
     ceph_config {
-      'global/fsid':                        value => $fsid;
-      'global/keyring':                     value => $keyring;
-      'global/osd_pool_default_pg_num':     value => $osd_pool_default_pg_num;
-      'global/osd_pool_default_pgp_num':    value => $osd_pool_default_pgp_num;
-      'global/osd_pool_default_size':       value => $osd_pool_default_size;
-      'global/osd_pool_default_min_size':   value => $osd_pool_default_min_size;
+      'global/fsid': value => $fsid;
+      'global/keyring': value => $keyring;
+      'global/osd_pool_default_pg_num': value => $osd_pool_default_pg_num;
+      'global/osd_pool_default_pgp_num': value => $osd_pool_default_pgp_num;
+      'global/osd_pool_default_size': value => $osd_pool_default_size;
+      'global/osd_pool_default_min_size': value => $osd_pool_default_min_size;
       'global/osd_pool_default_crush_rule': value => $osd_pool_default_crush_rule;
-      'global/mon_osd_full_ratio':          value => $mon_osd_full_ratio;
-      'global/mon_osd_nearfull_ratio':      value => $mon_osd_nearfull_ratio;
-      'global/mon_initial_members':         value => $mon_initial_members;
-      'global/mon_host':                    value => $mon_host;
-      'global/require_signatures':          value => $require_signatures;
-      'global/cluster_require_signatures':  value => $cluster_require_signatures;
-      'global/service_require_signatures':  value => $service_require_signatures;
-      'global/sign_messages':               value => $sign_messages;
-      'global/cluster_network':             value => $cluster_network;
-      'global/public_network':              value => $public_network;
+      'global/mon_osd_full_ratio': value => $mon_osd_full_ratio;
+      'global/mon_osd_nearfull_ratio': value => $mon_osd_nearfull_ratio;
+      'global/mon_initial_members': value => $mon_initial_members;
+      'global/mon_host': value => $mon_host;
+      'global/require_signatures': value => $require_signatures;
+      'global/cluster_require_signatures': value => $cluster_require_signatures;
+      'global/service_require_signatures': value => $service_require_signatures;
+      'global/sign_messages': value => $sign_messages;
+      'global/cluster_network': value => $cluster_network;
+      'global/public_network': value => $public_network;
     }
 
-    /*if $authentication_type == 'cephx' {
+    if $authentication_type == 'cephx' {
       ceph_config {
         'global/auth_cluster_required': value => 'cephx';
         'global/auth_service_required': value => 'cephx';
-        'global/auth_client_required':  value => 'cephx';
-        'global/auth_supported':        value => 'cephx';
+        'global/auth_client_required': value => 'cephx';
+        'global/auth_supported': value => 'cephx';
       }
     } else {
       ceph_config {
         'global/auth_cluster_required': value => 'none';
         'global/auth_service_required': value => 'none';
-        'global/auth_client_required':  value => 'none';
-        'global/auth_supported':        value => 'none';
+        'global/auth_client_required': value => 'none';
+        'global/auth_supported': value => 'none';
       }
-    }*/
+    }
   }
 }
