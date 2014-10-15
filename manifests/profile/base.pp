@@ -17,6 +17,8 @@ class ceph::profile::base (
   $bootstrap_osd_key = undef,
   $bootstrap_mds_key = undef,
   $osds = undef,
+  $extra = false,
+  $fast_cgi = false,
 ){
   class { 'ceph::profile::params':
     fsid                      => $fsid,
@@ -41,6 +43,8 @@ class ceph::profile::base (
 
   class { 'ceph::repo':
     release => $ceph::profile::params::release,
+    extras  => $extra,
+    fastcgi => $fast_cgi,
   } ->
 
   class { 'ceph':
