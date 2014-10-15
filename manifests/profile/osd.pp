@@ -32,5 +32,6 @@ class ceph::profile::osd {
 
   class { 'ceph::osds':
     args => $ceph::profile::params::osds,
+    stage               => 'install'
   }
 }
