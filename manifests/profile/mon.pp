@@ -8,15 +8,9 @@ class ceph::profile::mon {
     keyring             => $ceph::profile::params::mon_keyring
   }
 
-  /*Ceph::Key {
-    inject         => true,
-    inject_as_id   => 'mon.',
-    inject_keyring => "/var/lib/ceph/mon/ceph-${::hostname}/keyring",
-  }*/
-
   if $admin_key {
     ceph::key { 'client.admin':
-      secret       => $admin_keyy,
+      secret       => $ceph::profile::params::admin_key,
       cap_mon      => 'allow *',
       cap_osd      => 'allow *',
       cap_mds      => 'allow *',
@@ -26,7 +20,7 @@ class ceph::profile::mon {
 
   if $boostrap_osd_key {
     ceph::key { 'client.bootstrap-osd':
-      secret           => $boostrap_osd_key,
+      secret           => $ceph::profile::params::bootstrap_osd_key,
       keyring_path     => '/var/lib/ceph/bootstrap-osd/ceph.keyring',
       cap_mon          => 'allow *',
     }
@@ -34,7 +28,7 @@ class ceph::profile::mon {
 
   if $boostrap_mds_key {
     ceph::key { 'client.bootstrap-mds':
-      secret           => $boostrap_mds_key,
+      secret           => $ceph::profile::params::boostrap_mds_key,
       keyring_path     => '/var/lib/ceph/bootstrap-mds/ceph.keyring',
       cap_mon          => 'allow *',
     }
